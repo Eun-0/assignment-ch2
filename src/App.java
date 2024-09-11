@@ -1,6 +1,7 @@
 import java.util.Scanner;
+import java.util.List;
 
-// 2. Lv 1에서 구현한 App 클래스의 main 메서드에 Calculator 클래스가 활용될 수 있도록 수정
+// 2. Lv 1에서 구현한 App 클래스의 main 메서드에서 Calculator 클래스가 활용될 수 있도록 수정
 public class App {
     public static void main(String[] args) {
         // Calculator 인스턴스 생성
@@ -67,6 +68,30 @@ public class App {
 //                default:                // 연산자 입력 오류
 //                    System.out.println("유효하지 않은 연산자입니다.");
 //            }
+
+
+            // 4. App 클래스의 main 메서드에서 삭제 메서드가 활용될 수 있도록 수정
+            System.out.println("저장된 데이터를 확인하시겠습니까? ('Y' 입력 시 확인)");
+            if (sc.next().equals("Y")) {
+                for (Double results : calculator.getListResults()) {
+                    System.out.println(" " + results);
+                }
+                System.out.println("------------");
+            }
+
+            System.out.println("가장 먼저 저장된 데이터를 삭제하시겠습니까? ('Y' 입력 시 삭제)");
+            if (sc.next().equals("Y")) {
+                System.out.println("[데이터 삭제중]");
+                calculator.removeFirstResult();
+
+                System.out.println("저장된 데이터를 확인하시겠습니까? ('Y' 입력 시 확인)");
+                if (sc.next().equals("Y")) {
+                    for (Double results : calculator.getListResults()) {
+                        System.out.println(" " + results);
+                    }
+                    System.out.println("------------");
+                }
+            }
 
             System.out.println("연산을 계속 진행하시겠습니까? ('exit' 입력 시 종료)");
             if (sc.next().equals("exit")) {

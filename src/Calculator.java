@@ -1,5 +1,6 @@
 //import java.util.Collection;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Calculator {
@@ -23,25 +24,44 @@ public class Calculator {
         };
 
         double operateResult = operation.operate(num1, num2);
-        setResult(operateResult);
+        setListResults(addResult(operateResult));
 
         return operateResult;
     }
 
     // 3. App 클래스의 main 메서드에서 Calculator 클래스의 연산 결과를 저장하고 있는 컬렉션 필드에 직접 접근하지 못하도록 수정 (캡슐화)
     // 간접 접근을 통해 필드에 접근하여 수정할 수 있도록 구현합니다. (Setter 메서드)
-    public void setResult(double value) {
-        this.results.add(value);
+    public void setListResults(List<Double> list) {
+        this.results = list;
     }
 
     // 3. App 클래스의 main 메서드에서 Calculator 클래스의 연산 결과를 저장하고 있는 컬렉션 필드에 직접 접근하지 못하도록 수정 (캡슐화)
     // 간접 접근을 통해 필드에 접근하여 가져올 수 있도록 구현합니다. (Getter 메서드)
-    public double getResult() {
-        if (this.results.size() == 0) {  // result.isEmpty()
-            System.out.println("Nothing to do");
-            return 0;
+    public List<Double> getListResults() {
+        return this.results;
+    }
+
+
+    // 4. Calculator 클래스에 저장된 연산 결과들 중 가장 먼저 저장된 데이터를 삭제하는 기능을 가진 메서드를 구현
+    public void removeFirstResult() {
+        removeResult(0);
+    }
+
+    // i번째 결과값을 삭제하는 메서드
+    public void removeResult(int i) {
+        if (this.results.size() == 0) {
+            System.out.println("저장된 결과값이 없습니다!");
         } else {
-            return this.results.get(this.results.size() - 1);
+            List<Double> temp = getListResults();
+            temp.remove(i);
+            setListResults(temp);
         }
+    }
+
+    // double형의 value 값을 추가하는 메서드
+    public List<Double> addResult(double value) {
+        List<Double> temp = getListResults();
+        temp.add(value);
+        return temp;
     }
 }

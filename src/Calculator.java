@@ -47,7 +47,7 @@ public class Calculator {
         removeResult(0);
     }
 
-    // i번째 결과값을 삭제하는 메서드
+    // 저장된 연산 결과 중 i번째 결과값을 삭제하는 메서드
     public void removeResult(int i) {
         if (this.results.size() == 0) {
             System.out.println("저장된 결과값이 없습니다!");
